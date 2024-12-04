@@ -12,15 +12,13 @@ const HeroSection = () => {
     }
   });
   return (
-    <div className='container mx-auto'>
-      <div className='grid grid-cols-12 '>
+    <div className='grid grid-cols-12 '>
         <div className='col-span-3 mt-3'>
           <Sidebar categories={categoriesData?.data}></Sidebar>
         </div>
         <div className='col-span-9 mt-3'>
           <Banner></Banner>
         </div>
-      </div>
     </div>
   )
 };

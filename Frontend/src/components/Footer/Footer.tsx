@@ -3,7 +3,7 @@ import React from 'react'
 const Footer = () => {
   return (
     <footer className="bg-black text-white py-8">
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-5 gap-8">
+      <div className="container mx-auto grid grid-cols-3 md:grid-cols-5 gap-8">
         <div>
           <h3 className="text-xl font-semibold">Exclusive</h3>
           <h4 className="text-lg mt-3 font-semibold">Subscribe</h4>
@@ -11,7 +11,7 @@ const Footer = () => {
           <form className="mt-4">
             <input
               type="email"
-              className="border border-white bg-transparent py-2 pl-3"
+              className="border border-white bg-transparent py-2 md:w-[200px] pl-2"
               placeholder="Enter your email"
             />
           </form>

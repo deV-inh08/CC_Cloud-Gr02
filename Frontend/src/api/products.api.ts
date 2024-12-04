@@ -1,3 +1,4 @@
+import { QueryConfig } from "../components/FlashSales/FlashSales";
 import { URL } from "../constants/product";
 import { Categories } from "../types/categories.type";
 import { ProductList } from "../types/products.type";
@@ -6,8 +7,8 @@ import { SuccessResponse } from "../utils/utils.type";
 
 
 const ProductApi = {
-  getProducts() {
-    return httpProduct.get<SuccessResponse<ProductList>>(URL).then((repsone) => {
+  getProducts(params: QueryConfig) {
+    return httpProduct.get<SuccessResponse<ProductList>>(URL, { params }).then((repsone) => {
       return repsone.data
     })
   },
