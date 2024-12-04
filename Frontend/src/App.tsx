@@ -1,9 +1,12 @@
+import React from "react"
+import { useRouteElements } from "./hooks/useRouteElements"
+
 
 function App() {
-
+  const routeElements = useRouteElements()
   return (
-    <div>
-      <p className="text-red-400">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, explicabo!</p>
+    <div className="font-poppins">
+      {routeElements}
     </div>
   )
 }
