@@ -5,6 +5,7 @@ import BestSellingProuduct from '../../components/BestSellingProduct';
 import BannerProduct from '../../components/BannerProduct';
 import ExploreProduct from '../../components/ExploreProduct';
 import Feature from '../../components/Feature';
+import Services from '../../components/Services';
 
 const Home = () => {
   return (
@@ -15,6 +16,7 @@ const Home = () => {
       <BannerProduct></BannerProduct>
       <ExploreProduct></ExploreProduct>
       <Feature></Feature>
+      <Services></Services>
     </div>
   )
 }
