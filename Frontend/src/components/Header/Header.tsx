@@ -4,7 +4,7 @@ import { paths } from '../../constants/paths';
 
 const Header = () => {
   return (
-    <div className="py-4 top-0 sticky z-10 shadow-lg font-karla">
+    <div className="py-4 top-0 sticky z-10 bg-white shadow-lg font-karla">
       <div className='container flex justify-between mx-auto'>
         <Link
           to={paths.home}
@@ -39,7 +39,6 @@ const Header = () => {
           </Link>
         </ul>
         <div className='flex gap-4 items-center'>
-
           <Link
             className='flex items-center relative'
           >

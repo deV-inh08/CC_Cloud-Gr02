@@ -2,12 +2,21 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { paths } from '../../constants/paths'
 
-const ViewAllProduct = () => {
-  return (
-    <Link to={paths.home} className=' mx-auto bg-primaryColor text-white px-9 py-4 rounded-md'>
-      View All Products
-    </Link>
-  )
+interface ViewAllProductType {
+    size?: 'small' | 'large'; 
+}
+
+const ViewAllProduct = ({ size }: ViewAllProductType) => {
+  const classes =
+  size === 'large'
+    ? 'mx-auto bg-primaryColor text-gray-200 px-9 py-4 text-lg rounded-md hover:bg-primaryColor/70 transition-all'
+    : 'bg-primaryColor text-gray-200 px-5 py-3 text-sm rounded hover:bg-primaryColor/70 transition-all';
+
+return (
+  <Link to={paths.home} className={classes}>
+    View All Products
+  </Link>
+);
 }
 
 export default ViewAllProduct
