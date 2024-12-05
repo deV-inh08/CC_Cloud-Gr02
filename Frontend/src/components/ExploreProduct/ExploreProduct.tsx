@@ -9,7 +9,7 @@ import ViewAllProduct from '../ViewAllProduct';
 const ExploreProduct = () => {
   const queryConfig: QueryConfig = {
     skip: "100",
-    limit: "12"
+    limit: "15"
   };
   const { data } = useQuery({
     queryKey: ['/products', queryConfig],
@@ -28,7 +28,7 @@ const ExploreProduct = () => {
         {/* <ViewAllProduct size='small'></ViewAllProduct> */}
       </section>
       <div className='mt-5'>
-        <div className='grid md:grid-cols-4 grid-cols-2'>
+        <div className='grid md:grid-cols-5 grid-cols-2'>
           {data && data?.products.map((item: Product, index: number) => {
             return (
               <ProductItem item={item}></ProductItem>

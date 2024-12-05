@@ -2,7 +2,7 @@ import React from 'react'
 
 const Services = () => {
   return (
-    <section className='flex gap- mt-20 justify-center'>
+    <section className='flex gap-20 mt-24 justify-center'>
       <div className='flex flex-col gap-4 items-center'>
         <div className='bg-black w-[60px] h-[60px] rounded-full flex justify-center items-center'>
           <svg width={41} height={40} viewBox="0 0 41 40" fill="none" xmlns="http://www.w3.org/2000/svg">

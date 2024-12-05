@@ -37,7 +37,7 @@ const Feature = () => {
             </div>
           </div>
           <div className='flex gap-2 justify-between mt-7'>
-            <div className="relative bg-gray-800 w-[300px]  text-white rounded-lg overflow-hidden">
+            <div className="relative bg-gray-800 sm:w-[380px] h-auto text-white rounded-lg overflow-hidden">
               <img src={speaker} alt="Speakers" className="w-full h-full object-cover" />
               <div className="absolute left-0 bottom-0 right-0 p-4 bg-gradient-to-t from-black to-transparent">
                 <h3 className="text-xl font-bold">Speakers</h3>
@@ -47,7 +47,7 @@ const Feature = () => {
             </div>
 
             {/* Perfume */}
-            <div className="relative bg-gray-800 w-full sm:w-[300px] text-white rounded-lg overflow-hidden">
+            <div className="relative bg-gray-800 sm:w-[380px] h-auto text-white rounded-lg overflow-hidden">
               <img src={Perfume} alt="Perfume" className="w-full h-full object-cover" />
               <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent">
                 <h3 className="text-xl font-bold">Perfume</h3>
