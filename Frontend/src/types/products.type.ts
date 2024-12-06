@@ -28,8 +28,8 @@ export interface ProductList {
 };
 
 export interface ProductListConfig {
-  skip?: string | "0"
-  limit?: string | "15"
+  skip?: number | 0
+  limit?: number | 15
   order?: "asc" | "desc"
   sortBy?: "stock" | "price" | "rating"
   category?: string

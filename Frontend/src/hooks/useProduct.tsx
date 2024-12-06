@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import ProductApi from '../api/products.api';
-import { QueryConfig } from '../components/FlashSales/FlashSales';
+import { QueryConfig } from '../types/products.type';
 
 const useProducts = ({ skip, limit, order, sortBy }: QueryConfig) => {
   const queryConfig: QueryConfig = {

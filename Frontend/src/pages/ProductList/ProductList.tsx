@@ -109,7 +109,7 @@ const ProductList = () => {
             </div>
           )
           }
-          <Pagination></Pagination>
+          <Pagination queryConfig={queryConfig} totalPage={TOTALPAGE}></Pagination>
         </div>
       </section>
     </div>
