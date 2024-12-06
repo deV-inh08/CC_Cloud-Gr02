@@ -1,4 +1,4 @@
-import { QueryConfig } from "../types/products.type";
+import { Product, QueryConfig } from "../types/products.type";
 import { URL } from "../constants/product";
 import { Categories } from "../types/categories.type";
 import { ProductList } from "../types/products.type";
@@ -21,6 +21,16 @@ const ProductApi = {
     return httpProduct.get<SuccessResponse<ProductList>>(`products/category/${category}`, { params }).then((response) => {
       return response.data
     })
+  },
+
+  searchProduct(search: string, params?: QueryConfig) {
+    return httpProduct.get<SuccessResponse<ProductList>>(`products/search?q=${search}`, { params }).then((repsonse) => {
+      return repsonse.data
+    })
+  },
+
+  getProductDetail(id: string) {
+    return httpProduct.get<SuccessResponse<Product>>(`${URL}/${id}`)
   }
 }
 

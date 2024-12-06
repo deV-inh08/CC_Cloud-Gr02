@@ -109,7 +109,13 @@ const ProductList = () => {
             </div>
           )
           }
-          <Pagination queryConfig={queryConfig} totalPage={TOTALPAGE}></Pagination>
+          {
+            productData && productData.products.length > 0 && (
+              <article className='mx-auto'>
+                <Pagination queryConfig={queryConfig} totalPage={TOTALPAGE}></Pagination>
+              </article>
+            )
+          }
         </div>
       </section>
     </div>

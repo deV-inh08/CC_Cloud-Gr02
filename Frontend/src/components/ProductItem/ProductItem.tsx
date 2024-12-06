@@ -10,7 +10,7 @@ interface Props {
 
 const ProductItem = ({ item }: Props) => {
   return (
-    <Link to={`${paths.products}/${item.id}`}>
+    <Link to={`${paths.home}${item.id}`}>
       <article className='flex select-none'>
         <section className='rounded-md relative w-[250px] h-[400px] flex flex-col'>
           <div className='absolute z-10 w-[50px] h-[25px] bg-primaryColor text-white text-center'>

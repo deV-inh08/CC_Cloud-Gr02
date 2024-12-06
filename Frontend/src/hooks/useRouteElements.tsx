@@ -1,13 +1,17 @@
-import { useRoutes } from "react-router-dom"
-import Main from "../layout/Main"
-import Home from "../pages/Home"
-import { paths } from "../constants/paths"
-import SignUpLayout from "../layout/SignUpLayout/SignUpLayout"
-import SignUp from "../pages/SignUp"
-import SignIn from "../pages/SignIn"
-import Contact from "../pages/Contact"
-import About from "../pages/About/About"
-import ProductList from "../pages/ProductList"
+import React, { lazy, Suspense } from 'react';
+import { useRoutes } from 'react-router-dom';
+import Main from '../layout/Main';
+import SignUpLayout from '../layout/SignUpLayout/SignUpLayout';
+import { paths } from '../constants/paths';
+
+const Home = lazy(() => import('../pages/Home'));
+const Contact = lazy(() => import('../pages/Contact'));
+const About = lazy(() => import('../pages/About/About'));
+const ProductList = lazy(() => import('../pages/ProductList'));
+const SignUp = lazy(() => import('../pages/SignUp'));
+const SignIn = lazy(() => import('../pages/SignIn'));
+const Cart = lazy(() => import('../pages/Cart'))
+const ProductDetails = lazy(() => import('../pages/ProductDetails'))
 
 export const useRouteElements = () => {
   const routesElememt = useRoutes([
@@ -16,31 +20,60 @@ export const useRouteElements = () => {
       index: true,
       element: (
         <Main>
-          <Home></Home>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Home />
+          </Suspense>
         </Main>
-      )
+      ),
     },
     {
       path: paths.contact,
       element: (
         <Main>
-          <Contact></Contact>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Contact />
+          </Suspense>
         </Main>
-      )
+      ),
     },
     {
       path: paths.about,
       element: (
         <Main>
-          <About></About>
+          <Suspense fallback={<div>Loading...</div>}>
+            <About />
+          </Suspense>
         </Main>
-      )
+      ),
     },
     {
       path: paths.products,
       element: (
         <Main>
-          <ProductList></ProductList>
+          <Suspense fallback={<div>Loading...</div>}>
+            <ProductList />
+          </Suspense>
+        </Main>
+      ),
+    },
+    {
+      path: paths.cart,
+      element: (
+        <Main>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Cart />
+          </Suspense>
+        </Main>
+      )
+    },
+    {
+      path: paths.productDetail,
+      index: true,
+      element: (
+        <Main>
+          <Suspense fallback={<div>Loading...</div>}>
+            <ProductDetails />
+          </Suspense>
         </Main>
       )
     },
@@ -48,21 +81,23 @@ export const useRouteElements = () => {
       path: paths.signup,
       element: (
         <SignUpLayout>
-          <SignUp></SignUp>
+          <Suspense fallback={<div>Loading...</div>}>
+            <SignUp />
+          </Suspense>
         </SignUpLayout>
-      )
+      ),
     },
     {
       path: paths.signin,
       element: (
         <SignUpLayout>
-          <SignIn></SignIn>
+          <Suspense fallback={<div>Loading...</div>}>
+            <SignIn />
+          </Suspense>
         </SignUpLayout>
-      )
-    }
-  ])
+      ),
+    },
+  ]);
 
-  return routesElememt
-}
-
-
+  return routesElememt;
+};

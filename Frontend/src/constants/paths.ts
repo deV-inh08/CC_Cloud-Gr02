@@ -5,11 +5,13 @@ export const paths = {
     signup: '/signup',
     signin: '/signin',
     products: '/products',
+    cart: "/cart",
+    wishlist: '/wishlist',
+    productDetail: ":id",
 
     user: '/user',
     profile: "/user/profile",
     changePassword: "/user/password",
     historyPurchase: "/user/purchase",
-    productDetail: ":id",
-    cart: "/cart"
+    
 } as const

@@ -48,7 +48,7 @@ const SortProductList = ({ queryConfig }: PropsType) => {
     <div className='bg-gray-300/40 py-5 px-3'>
       <div className='flex flex-wrap items-center justify-between gap-2'>
         <div className='flex items-center flex-wrap gap-2'>
-          <p className='text-primaryColor'>Sort buy</p>
+          <p className='text-primaryColor'>Sort by</p>
           <button
             className={classNames("h-8 px-4 capitalize text-center", {
                 "bg-primaryColor text-white hover:bg-orange/80" : isActiveSortBy(sort_by.rating),
