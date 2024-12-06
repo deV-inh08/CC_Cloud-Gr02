@@ -15,4 +15,4 @@
 
 
 ## Techstack ##
-***  Vite; React; Typescript; Prettierrc; Eslint; JWT; NodeJs(ExpressJs); Redux-toolkit; Axios ***
+***  Vite; React; Typescript; Prettierrc; Eslint; JWT; NodeJs(ExpressJs); Redux-toolkit; Axios, React-Query ***

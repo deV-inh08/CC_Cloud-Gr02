@@ -18,7 +18,7 @@ const Feature = () => {
       <div className="mt-8 grid grid-cols-12 gap-8">
 
         {/* PlayStation 5 */}
-        <div className="relative bg-black col-span-6 text-white rounded-lg overflow-hidden">
+        <div className="relative bg-black h-[780px] col-span-6 text-white rounded-lg overflow-hidden">
           <img src={PS5} alt="PlayStation 5" className="w-[570px] h-[600px] object-cover absolute bottom-0" />
           <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent">
             <h3 className="text-xl font-bold">PlayStation 5</h3>
@@ -28,16 +28,16 @@ const Feature = () => {
         </div>
 
         <div className='col-span-6 '>
-          <div className="relative bg-gray-800 text-white rounded-lg overflow-hidden">
+          <div className="relative bg-gray-800 h-[400px] text-white rounded-lg overflow-hidden">
             <img src={women} alt="Women's Collections" className="w-full h-full object-cover" />
-            <div className="absolute bottom-0 left-0 p-4 bg-gradient-to-t from-black to-transparent">
+            <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent">
               <h3 className="text-xl font-bold">Women's Collections</h3>
               <p className="text-sm">Featured women collections that give you another vibe.</p>
               <a href="#" className="text-primaryColor mt-2 inline-block">Shop Now</a>
             </div>
           </div>
           <div className='flex gap-2 justify-between mt-7'>
-            <div className="relative bg-gray-800 sm:w-[380px] h-auto text-white rounded-lg overflow-hidden">
+            <div className="relative bg-gray-800 h-[350px] w-[370px] text-white rounded-lg overflow-hidden">
               <img src={speaker} alt="Speakers" className="w-full h-full object-cover" />
               <div className="absolute left-0 bottom-0 right-0 p-4 bg-gradient-to-t from-black to-transparent">
                 <h3 className="text-xl font-bold">Speakers</h3>
@@ -47,7 +47,7 @@ const Feature = () => {
             </div>
 
             {/* Perfume */}
-            <div className="relative bg-gray-800 sm:w-[380px] h-auto text-white rounded-lg overflow-hidden">
+            <div className="relative bg-gray-800 h-[350px] w-[370px] text-white rounded-lg overflow-hidden">
               <img src={Perfume} alt="Perfume" className="w-full h-full object-cover" />
               <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent">
                 <h3 className="text-xl font-bold">Perfume</h3>
