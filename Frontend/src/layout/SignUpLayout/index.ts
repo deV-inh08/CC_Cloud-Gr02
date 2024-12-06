@@ -1,3 +1,3 @@
-import RegisterLayout from "./RegisterLayout";
+import RegisterLayout from "./SignUpLayout";
 
 export default RegisterLayout;

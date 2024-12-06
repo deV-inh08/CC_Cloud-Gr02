@@ -7,6 +7,7 @@ import SignUp from "../pages/SignUp"
 import SignIn from "../pages/SignIn"
 import Contact from "../pages/Contact"
 import About from "../pages/About/About"
+import ProductList from "../pages/ProductList"
 
 export const useRouteElements = () => {
   const routesElememt = useRoutes([
@@ -32,6 +33,14 @@ export const useRouteElements = () => {
       element: (
         <Main>
           <About></About>
+        </Main>
+      )
+    },
+    {
+      path: paths.products,
+      element: (
+        <Main>
+          <ProductList></ProductList>
         </Main>
       )
     },

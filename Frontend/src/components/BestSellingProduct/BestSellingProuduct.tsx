@@ -1,26 +1,16 @@
 import React from 'react'
 import ViewAllProduct from '../ViewAllProduct';
-import { QueryConfig } from '../FlashSales/FlashSales';
-import { useQuery } from '@tanstack/react-query';
-import ProductApi from '../../api/products.api';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation'
 import ProductItem from '../ProductItem/ProductItem';
+import useProducts from '../../hooks/useProduct';
+import { Product } from '../../types/products.type';
 
 const BestSellingProuduct = () => {
-  const queryConfig: QueryConfig = {
-    skip: "20",
-    limit: "10"
-  };
-  const { data } = useQuery({
-    queryKey: ['/products', queryConfig],
-    queryFn: () => {
-      return ProductApi.getProducts(queryConfig)
-    }
-  });
+  const { data } = useProducts({ skip: "20", limit: "10" });
 
   return (
     <>

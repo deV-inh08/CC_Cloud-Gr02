@@ -1,20 +1,14 @@
 import React from 'react'
 import Sidebar from '../Sidebar';
 import Banner from '../Banner';
-import ProductApi from '../../api/products.api';
-import { useQuery } from '@tanstack/react-query';
+import useCategories from '../../hooks/useCategories';
 
 const HeroSection = () => {
-  const { data: categoriesData } = useQuery({
-    queryKey: ['/categories'],
-    queryFn: () => {
-      return ProductApi.getCategories()
-    }
-  });
+  const { data: categoriesData } = useCategories()
   return (
     <div className='grid grid-cols-12 '>
         <div className='col-span-3 mt-3'>
-          <Sidebar categories={categoriesData?.data}></Sidebar>
+          <Sidebar categories={categoriesData?.data} sliceEnd={11}></Sidebar>
         </div>
         <div className='col-span-9 mt-3'>
           <Banner></Banner>

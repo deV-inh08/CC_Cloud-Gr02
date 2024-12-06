@@ -1,7 +1,7 @@
 export interface SuccessResponse<Data> {
   // products: SuccessResponse<ProductList> | undefined
   message: string
-  data: Data
+  data?: Data
 };
 
 export interface ErrorResponse<Data> {

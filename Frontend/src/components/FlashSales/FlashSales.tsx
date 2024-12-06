@@ -1,7 +1,5 @@
-import { useQuery } from '@tanstack/react-query';
 import React from 'react'
-import ProductApi from '../../api/products.api';
-import { Product, ProductListConfig } from '../../types/products.type';
+import { Product } from '../../types/products.type';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation } from 'swiper/modules';
 import ProductItem from '../ProductItem/ProductItem';
@@ -11,24 +9,11 @@ import 'swiper/css/navigation'
 import ViewAllProduct from '../ViewAllProduct';
 import CountdownTimer from '../CountDown/CountDown';
 import { flashSaleEndTime } from '../../constants/timeCountdown';
+import useProducts from '../../hooks/useProduct';
 
-
-export type QueryConfig = {
-  [key in keyof ProductListConfig]: string
-};
 
 const FlashSales = () => {
-  const queryConfig: QueryConfig = {
-    skip: "0",
-    limit: "10"
-  };
-  
-  const { data } = useQuery({
-    queryKey: ['/products', queryConfig],
-    queryFn: () => {
-      return ProductApi.getProducts(queryConfig)
-    }
-  });
+  const { data } = useProducts({ skip: "0", limit: "15" });
 
   return (
     <>

@@ -28,10 +28,14 @@ export interface ProductList {
 };
 
 export interface ProductListConfig {
-  skip?: number | 0
-  limit?: number | 15
+  skip?: string | "0"
+  limit?: string | "15"
   order?: "asc" | "desc"
   sortBy?: "stock" | "price" | "rating"
   category?: string
   search?: string;
 }
+
+export type QueryConfig = {
+  [key in keyof ProductListConfig]: string
+};

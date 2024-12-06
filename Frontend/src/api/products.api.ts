@@ -1,4 +1,4 @@
-import { QueryConfig } from "../components/FlashSales/FlashSales";
+import { QueryConfig } from "../types/products.type";
 import { URL } from "../constants/product";
 import { Categories } from "../types/categories.type";
 import { ProductList } from "../types/products.type";
@@ -15,6 +15,12 @@ const ProductApi = {
   
   getCategories() {
     return httpProduct.get<SuccessResponse<Categories>>(`${URL}/categories`)
+  },
+
+  getProductByCategory(category: string, params?: QueryConfig) {
+    return httpProduct.get<SuccessResponse<ProductList>>(`products/category/${category}`, { params }).then((response) => {
+      return response.data
+    })
   }
 }
 
