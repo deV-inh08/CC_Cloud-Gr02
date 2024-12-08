@@ -9,6 +9,11 @@ interface Props {
 };
 
 const ProductItem = ({ item }: Props) => {
+
+  const handleAddToCart = () => {
+
+  };
+  
   return (
     <Link to={`${paths.home}${item.id}`}>
       <article className='flex select-none'>

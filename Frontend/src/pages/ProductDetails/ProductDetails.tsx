@@ -3,7 +3,7 @@ import ProductApi from '../../api/products.api';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import QuantityController from '../../components/QuantityController';
-import { ProductList } from '../../types/products.type';
+import { Product, ProductList } from '../../types/products.type';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation } from 'swiper/modules';
 import 'swiper/css';

@@ -39,13 +39,15 @@ const ProductList = () => {
   const { data: productData, isLoading } = useQuery({
     queryKey: ['/products', queryConfig],
     queryFn: () => { 
-      if(queryConfig.category) {
+    if(queryConfig.category) {
         return ProductApi.getProductByCategory(queryConfig.category, queryConfig)
       } else {
         return ProductApi.getProducts(queryConfig)
       }
     }
   });
+
+  console.log(productData)
 
   const handleClickCategory = (category: string) => {
     setQueryConfig((prevConfig: QueryConfig) : QueryConfig => {
