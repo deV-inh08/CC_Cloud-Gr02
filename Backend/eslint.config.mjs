@@ -22,7 +22,7 @@ export default [
           semi: false,
           trailingComma: 'none',
           tabWidth: 2,
-          endOfLine: 'auto',
+          endOfLine: 'off',
           useTabs: false,
           singleQuote: true,
           printWidth: 120,
