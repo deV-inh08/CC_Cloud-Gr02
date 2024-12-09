@@ -1,6 +1,11 @@
 import validate from "~/utils/validation";
 import { checkSchema, ParamSchema } from "express-validator"
-import { USER_MESSAGE } from "~/constants/MESSAGES";
+import { USER_MESSAGE } from "~/constants/USER_MESSAGE";
+import userServices from "~/services/user.services";
+import databaseServices from "~/services/database.services";
+import { hashPassword } from "~/utils/crypto";
+import { config } from "dotenv"
+config()
 
 const passwordSchema: ParamSchema = {
   notEmpty: {
@@ -64,25 +69,59 @@ const confirmPasswordSchema: ParamSchema = {
 };
 
 const registerValidator = validate(checkSchema({
-  name: {
-    errorMessage: USER_MESSAGE.NAME_IS_REQUIRED,
-    isString: {
-      errorMessage: USER_MESSAGE.NAME_MUST_BE_A_STRING
+  email: {
+    notEmpty: {
+      errorMessage: USER_MESSAGE.EMAIL_IS_REQUIRED
     },
-    isLength: {
-      options: {
-        min: 2,
-        max: 255
-      },
-      errorMessage: USER_MESSAGE.NAME_LENGTH_MUST_BE_FROM_1_TO_100
+    isEmail: {
+      errorMessage: USER_MESSAGE.EMAIL_IS_INVALID
     },
-    trim: true
+    trim: true,
+    custom: {
+      options: async (value) => {
+        const isExitsEmail = await userServices.checkEmailExits(value)
+        if (isExitsEmail) {
+          throw new Error(USER_MESSAGE.EMAIL_ALREADY_EXISTS)
+        }
+        return true
+      }
+    }
   },
   password: passwordSchema,
   confirm_password: confirmPasswordSchema,
-}))
+}, ['body']
+))
+
+const loginValidator = validate(checkSchema({
+  email: {
+    notEmpty: {
+      errorMessage: USER_MESSAGE.EMAIL_IS_REQUIRED,
+    },
+    isEmail: {
+      errorMessage: USER_MESSAGE.EMAIL_IS_INVALID
+    },
+    trim: true,
+    custom: {
+      options: async (value, { req }) => {
+        console.log(req)
+        const user = await databaseServices.query(
+          'SELECT * FROM users WHERE email = $1 AND password = $2 LIMIT 1', 
+          [value, hashPassword(req.body.password)]
+        );
+        if (user === null) {
+          throw new Error(USER_MESSAGE.EMAIL_OR_PASSWORD_INCORRECT)
+        }
+        req.user = user;
+        return true
+      }
+    }
+  },
+  password: passwordSchema
+}, ['body']
+));
+
 
 export {
   registerValidator,
-  
+  loginValidator
 }
