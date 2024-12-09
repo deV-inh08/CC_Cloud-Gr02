@@ -85,11 +85,14 @@ class UsersServices {
         date,
         refresh_token
       ]);
-
+      return {
+        access_token
+      }
     } catch (err) {
       await databaseServices.query('ROLLBACK');
       throw err;
     }
+    
   }
 
   async checkEmailExits(email: string) {

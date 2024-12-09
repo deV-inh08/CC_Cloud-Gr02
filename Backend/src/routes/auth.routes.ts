@@ -7,6 +7,8 @@ const userRouters = Router();
 // Register a user
 // POST
 // Body: { email: string, password: string, confirm_password: string }
+
+
 userRouters.post('/register', registerValidator, wrapRequestHandler(registerController))
 
 
