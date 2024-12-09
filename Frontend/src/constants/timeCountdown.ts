@@ -1,1 +1,1 @@
-export const flashSaleEndTime = '2024-12-09T23:59:59';
+export const flashSaleEndTime = '2024-12-15T23:59:59';
