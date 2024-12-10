@@ -12,7 +12,7 @@ const userRouters = Router();
 userRouters.post('/signup', registerValidator, wrapRequestHandler(registerController));
 
 
-userRouters.post('/login', loginValidator, wrapRequestHandler(loginController));
+userRouters.post('/signin', loginValidator, wrapRequestHandler(loginController));
 
 
 userRouters.post('/logout', accessTokenValidator, refressTokenValidator, wrapRequestHandler(logOutController))

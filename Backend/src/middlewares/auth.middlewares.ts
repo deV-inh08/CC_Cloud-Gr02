@@ -108,7 +108,6 @@ const loginValidator = validate(checkSchema({
     trim: true,
     custom: {
       options: async (value, { req }) => {
-        console.log(req)
         const user = await databaseServices.query(
           'SELECT * FROM users WHERE email = $1 AND password = $2 LIMIT 1', 
           [value, hashPassword(req.body.password)]
@@ -124,8 +123,6 @@ const loginValidator = validate(checkSchema({
   password: passwordSchema
 }, ['body']
 ));
-
-
 
 const accessTokenValidator = validate(checkSchema({
   access_token: {
@@ -155,7 +152,6 @@ const refressTokenValidator = validate(checkSchema({
     trim: true,
     custom: {
       options: async (value: string, { req }) => {
-        console.log(value)
         if(!value) {
           throw new ErrorWithStatus({
             message: USER_MESSAGE.REFRESH_TOKEN_IS_REQUIRED,

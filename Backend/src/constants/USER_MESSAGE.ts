@@ -3,13 +3,13 @@ export const USER_MESSAGE =  {
 
   LOGIN_SUCCESS: 'Login successfully',
   REGISTER_SUCCESS: 'Register successfully',
-  LOGOUT_SUCCESS: "logout successfully",
+  LOGOUT_SUCCESS: "Logout successfully",
 
-  TOKEN_NOT_PROVIDED: "Token không được cung cấp",
-  TOKEN_INVALID: "Token không hợp lệ",
+  TOKEN_NOT_PROVIDED: "Token not provider",
+  TOKEN_INVALID: "Token invalid",
 
-  USER_NOT_EXIST: "Nguời dùng không tồn tại",
-  USER_EXIST: "Nguời dùng đã tồn tại",
+  USER_NOT_EXISTS: "User not exists",
+  USER_EXISTS: "USER_EXIST",
 
   EMAIL_ALREADY_EXISTS: "Email already exists",
   EMAIL_NOT_EXISTS: "Email not exists",
