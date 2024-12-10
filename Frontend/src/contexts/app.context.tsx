@@ -18,10 +18,16 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     initialAppContext.isAuthenticated
   )
 
+  const reset = () => {
+    setIsAuthenticated(false)
+  }
+
   const value = {
     isAuthenticated,
-    setIsAuthenticated
+    setIsAuthenticated,
+    reset
   }
+  
   return (
   <AppContext.Provider value={value}>
     { children }  

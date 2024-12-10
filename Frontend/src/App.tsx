@@ -1,5 +1,6 @@
 import React from "react"
 import { useRouteElements } from "./hooks/useRouteElements"
+import { ToastContainer } from "react-toastify"
 
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
   return (
     <div className="font-poppins">
       {routeElements}
+      <ToastContainer></ToastContainer>
     </div>
   )
 }

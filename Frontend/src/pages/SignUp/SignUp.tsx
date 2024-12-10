@@ -3,14 +3,13 @@ import image from "../../assets/imageRegister.png"
 import { paths } from '../../constants/paths'
 import { Link, useNavigate } from 'react-router-dom'
 import Input from '../../components/Input'
-import { toast } from 'react-toast'
+import { toast } from "react-toastify"
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Schema, schema } from '../../utils/rules'
 import { AppContext } from '../../contexts/app.context'
 import { useMutation } from '@tanstack/react-query'
 import authAPI from '../../api/auth.api'
-import { Omit } from 'lodash'
 import { isAxiosUnprocessableEntityError } from '../../utils/utils'
 import { ErrorResponse } from '../../utils/utils.type'
 
@@ -41,13 +40,12 @@ const SignUp = () => {
     const body = data;
     signupAccountMutation.mutate(body, {
       onSuccess: (data) => {
-        console.log(data)
         setIsAuthenticated(true)
         navigate('/')
-        toast.success('Register Successfully')
+        toast.success('Register Successfully', { autoClose: 1000 })
       },
       onError: (error) => {
-        if (isAxiosUnprocessableEntityError<ErrorResponse<Omit<FormData, "confirm_password">>>(error)) {
+        if (isAxiosUnprocessableEntityError<ErrorResponse<FormData>>(error)) {
           const formError = error.response?.data;
           if (formError) {
             Object.keys(formError).forEach((key) => {

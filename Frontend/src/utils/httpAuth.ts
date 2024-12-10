@@ -2,7 +2,7 @@ import axios, { AxiosError, HttpStatusCode, type AxiosInstance } from "axios";
 import { clearLocalStorage, getAccessTokenFromLS, saveAccessTokenToLS } from "./auth";
 import { paths } from "../constants/paths";
 import { AuthResponse } from "../types/auth.type";
-import { toast } from "react-toast";
+import { toast } from "react-toastify";
 
 class HttpAuth {
   instance: AxiosInstance
@@ -44,8 +44,8 @@ class HttpAuth {
           ![HttpStatusCode.UnprocessableEntity, HttpStatusCode.Unauthorized].includes(error.response?.status as number)
         ) {
           const data = error.response?.data
-          const message = data.message || error.message
-          toast.error(message)
+          const message: string = data.message || error.message
+          toast.error(message, { autoClose: 1000 })
         }
         if(error.response?.status === HttpStatusCode.Unauthorized) {
           clearLocalStorage()
