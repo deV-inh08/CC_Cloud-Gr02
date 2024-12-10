@@ -37,7 +37,7 @@ export const getRules = (getValues?: UseFormGetValues<any>): Rules => ({
         minLength: {
             value: 6,
             message: "Độ dài từ 6 - 150 ký tự"
-        }
+        },
     },
     confirm_password: {
         required: {
@@ -57,16 +57,7 @@ export const getRules = (getValues?: UseFormGetValues<any>): Rules => ({
             ? ((value) => value === getValues("password") || "Password không khớp")
             : undefined
     },
-
 });
-
-// function testPriceMinMax(this: yup.TestContext<AnyObject>)  {
-//     const { price_min, price_max } = this.parent as { price_min: string; price_max: string}
-//     if(price_min !== "" && price_max !== "") {
-//         return Number(price_max) >= Number(price_min)
-//     }
-//     return price_min !== "" || price_max !== ""
-// }
 
 
 export const schema = yup.object({
@@ -87,23 +78,7 @@ export const schema = yup.object({
             .max(150, "Độ dài từ 6 - 150 ký tự")
             .min(6, "Độ dài từ 6 - 150 ký tự")
             .oneOf([yup.ref("password")], "Password không trùng khớp"),
-        // price_min: yup
-        //     .string()
-        //     .test({
-        //         name: "price-not-allowed",
-        //         message: "Giá không phù hợp",
-        //         test: testPriceMinMax
-        //     }),
-        // price_max: yup
-        //     .string()
-        //     .test({
-        //         name: "price-not-allowed",
-        //         message: "Giá không phù hợp",
-        //         test: testPriceMinMax
-        //     }),
-        // name: yup
-        //     .string()
-        //     .required("Tên sản phẩm là bắt buộc")
     });
 
 export type Schema = yup.InferType<typeof schema>
+

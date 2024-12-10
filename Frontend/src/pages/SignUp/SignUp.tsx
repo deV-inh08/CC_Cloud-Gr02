@@ -3,7 +3,6 @@ import image from "../../assets/imageRegister.png"
 import { paths } from '../../constants/paths'
 import { Link, useNavigate } from 'react-router-dom'
 import Input from '../../components/Input'
-import { toast } from "react-toastify"
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Schema, schema } from '../../utils/rules'
@@ -12,6 +11,9 @@ import { useMutation } from '@tanstack/react-query'
 import authAPI from '../../api/auth.api'
 import { isAxiosUnprocessableEntityError } from '../../utils/utils'
 import { ErrorResponse } from '../../utils/utils.type'
+import { toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
+
 
 type FormData = Pick<Schema, "email" | "password" | "confirm_password">
 
@@ -22,7 +24,6 @@ const signupSchema = schema.pick([
 ]);
 
 const SignUp = () => {
-
   const { setIsAuthenticated } = useContext(AppContext);
   const navigate = useNavigate()
   const { register, handleSubmit, formState: { errors }, setError } = useForm<FormData>(
@@ -36,13 +37,12 @@ const SignUp = () => {
   });
 
   const onSubmit = handleSubmit((data) => {
-    // const body = omit(data, ['confirm_password'])
     const body = data;
     signupAccountMutation.mutate(body, {
       onSuccess: (data) => {
         setIsAuthenticated(true)
         navigate('/')
-        toast.success('Register Successfully', { autoClose: 1000 })
+        toast.success(data.data.message, { autoClose: 1000 })
       },
       onError: (error) => {
         if (isAxiosUnprocessableEntityError<ErrorResponse<FormData>>(error)) {
