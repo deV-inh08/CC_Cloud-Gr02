@@ -5,8 +5,8 @@ const authAPI = {
     return httpAuth.post('/signup', body)
   },
 
-  logoutAccount: () => {
-    return httpAuth.post('/logout')
+  logoutAccount: (body: {access_token: string, refresh_token: string}) => {
+    return httpAuth.post('/logout', body)
   }
 }
 

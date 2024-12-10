@@ -11,7 +11,7 @@ interface BannerItemType {
 
 const Banner = () => {
   return (
-    <div className='h-[400px] mb-10 overflow-hidden'>
+    <div className='h-[400px] mb-10 overflow-hidden relative z-0'>
       <Swiper pagination={{
           dynamicBullets: true,
         }}

@@ -4,18 +4,30 @@ import { paths } from '../../constants/paths';
 import { AppContext } from '../../contexts/app.context';
 import { useMutation } from '@tanstack/react-query';
 import authAPI from '../../api/auth.api';
+import Popover from '../Popover';
+import { clearLocalStorage, getAccessTokenFromLS, getRefreshTokenFromLS } from '../../utils/auth';
 
 const Header = () => {
-  const { isAuthenticated, setIsAuthenticated} = useContext(AppContext);
+  const { isAuthenticated, setIsAuthenticated } = useContext(AppContext);
 
   const logoutMutation = useMutation({
-    mutationFn: authAPI.logoutAccount,
+    mutationFn: () => {
+      const access_token = getAccessTokenFromLS();
+      const refresh_token = getRefreshTokenFromLS(); 
+      return authAPI.logoutAccount({access_token, refresh_token})
+    },
     onSuccess: () => {
       setIsAuthenticated(false)
+      clearLocalStorage()
     }
-  })
+  });
+
+  const handleLogout = () => {
+    logoutMutation.mutate()
+  };
+
   return (
-    <div className="py-4 top-0 sticky z-10 bg-white shadow-lg font-karla">
+    <div className="py-4 top-0 sticky z-10  shadow-lg font-karla">
       <div className='container flex justify-between mx-auto'>
         <Link
           to={paths.home}
@@ -73,13 +85,20 @@ const Header = () => {
             </svg>
           </Link>
           {isAuthenticated && (
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" width={32} height={32} viewBox="0 0 32 32" fill="none">
+            <Popover className='flex items-center py-1 hover:text-gray-300 cursor-pointer' renderPopover={
+              <div>
+                <Link to="/user/profile" className='block text-white py-2 px-5 bg-black/80 backdrop-blur-lg hover:text-orange'>Manage My Account</Link>
+                <Link to="/" className='block text-white py-2 px-5 bg-black/80 backdrop-blur-lg hover:text-orange'>My Order</Link>
+                <button onClick={handleLogout} type="button" className='text-left text-white w-full block py-2 px-5 bg-black/80 backdrop-blur-lg hover:text-orange'>Logout</button>
+              </div>
+            }>
+              <svg xmlns="http://www.w3.org/2000/svg" width={32} height={32} viewBox="0 0 32 32" fill="none">
                 <path d="M24 27V24.3333C24 22.9188 23.5224 21.5623 22.6722 20.5621C21.8221 19.5619 20.669 19 19.4667 19H11.5333C10.331 19 9.17795 19.5619 8.32778 20.5621C7.47762 21.5623 7 22.9188 7 24.3333V27" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 <path d="M16.5 14C18.9853 14 21 11.9853 21 9.5C21 7.01472 18.9853 5 16.5 5C14.0147 5 12 7.01472 12 9.5C12 11.9853 14.0147 14 16.5 14Z" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
               <p></p>
-            </div>
+            </Popover>
+
           )}
 
         </div>

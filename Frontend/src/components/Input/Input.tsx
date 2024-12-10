@@ -14,7 +14,6 @@ const Input = (
                 { type, 
                   errorMessage, 
                   placeholder, 
-                  className, 
                   name, 
                   register, 
                   rules, 
@@ -24,7 +23,7 @@ const Input = (
               ) => {
   const registerResult = register && name ? register(name, rules) : null
   return (
-    <div className={className}>
+    <div >
         <input 
             className={classNameInput} 
             placeholder={placeholder}

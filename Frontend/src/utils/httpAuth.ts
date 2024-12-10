@@ -1,5 +1,5 @@
 import axios, { AxiosError, HttpStatusCode, type AxiosInstance } from "axios";
-import { clearLocalStorage, getAccessTokenFromLS, saveAccessTokenToLS } from "./auth";
+import { clearLocalStorage, getAccessTokenFromLS, getRefreshTokenFromLS, saveAccessTokenToLS, saveRefreshTokenToLS } from "./auth";
 import { paths } from "../constants/paths";
 import { AuthResponse } from "../types/auth.type";
 import { toast } from "react-toastify";
@@ -7,8 +7,10 @@ import { toast } from "react-toastify";
 class HttpAuth {
   instance: AxiosInstance
   private accessToken: string
+  private refreshtoken: string
   constructor() {
     this.accessToken = getAccessTokenFromLS()
+    this.refreshtoken = getRefreshTokenFromLS()
     this.instance = axios.create({
       baseURL: "http://localhost:3055/users/",
       timeout: 10000,
@@ -16,9 +18,10 @@ class HttpAuth {
         "Content-Type": "application/json"
       }
     })
-    this.instance.interceptors.request.use((config) => {      
+    this.instance.interceptors.request.use((config) => {   
       if(this.accessToken) {
         config.headers.Authorization = `Bearer ${this.accessToken}`
+        config.headers.Authorization = this.refreshtoken
         return config
       }
       return config
@@ -28,13 +31,15 @@ class HttpAuth {
     
     this.instance.interceptors.response.use(
       (response) => {
-        console.log(response)
         const { url } = response.config
         if(url === paths.signup || url === paths.signin) {
           this.accessToken = (response.data as AuthResponse).data?.access_token as string
-          saveAccessTokenToLS(this.accessToken)
+          this.refreshtoken = (response.data as AuthResponse).data?.refresh_token as string
+          saveAccessTokenToLS(`Bearer ${this.accessToken}`)
+          saveRefreshTokenToLS(this.refreshtoken)
         } else if(url === paths.logout) {
            this.accessToken = ""
+           this.refreshtoken = ""
            clearLocalStorage()
         }
         return response
@@ -58,3 +63,4 @@ class HttpAuth {
 
 const httpAuth = new HttpAuth().instance;
 export default httpAuth;
+
