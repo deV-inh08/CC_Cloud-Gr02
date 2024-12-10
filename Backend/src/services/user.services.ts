@@ -86,13 +86,13 @@ class UsersServices {
         refresh_token
       ]);
       return {
-        access_token
+        access_token,
+        refresh_token
       }
     } catch (err) {
       await databaseServices.query('ROLLBACK');
       throw err;
     }
-    
   }
 
   async checkEmailExits(email: string) {
@@ -103,6 +103,18 @@ class UsersServices {
       return false
     }
     
+  }
+
+  async logout(refresh_token: string) {
+    try {
+      const result = await databaseServices.query('UPDATE users SET refresh_token = NULL WHERE refresh_token = $1', [refresh_token]);
+      if(result.rowCount === 0) {
+        throw new Error("Refresh token not found")
+      }
+      return result
+    } catch(error) {
+      throw error
+    }
   }
 }
 

@@ -34,5 +34,11 @@ export const USER_MESSAGE =  {
   CONFIRM_PASSWORD_MUST_BE_STRONG: 'Password must be 6-50 characters long and contain at least 1 lowercase letter,1 uppercase letter, 1 number, 1 symbol',
   CONFIRM_PASSWORD_NOT_MATCH: 'Confirm password must be the same password',
 
-  JWT_SECRET_ACCESS_TOKEN: 'Jwt secret access token'
+  JWT_SECRET_ACCESS_TOKEN: 'Jwt secret access token',
+
+  ACCESS_TOKEN_IS_REQUIRED: 'Access token is required',
+
+  REFRESH_TOKEN_IS_REQUIRED: 'Refresh token is required',
+
+  USED_REFRESH_TOKEN_OR_NOT_EXITS: 'Used refresh token or not exits',
 }

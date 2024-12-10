@@ -15,6 +15,9 @@ app.use('/users', userRouters)
 
 databaseServices.connect()
 
+app.get('/', (req, res) => {
+  res.send('Hello express')
+})
 
 app.listen(PORT, () => {
   console.log(`Server is running at port: http://localhost:${PORT}`)

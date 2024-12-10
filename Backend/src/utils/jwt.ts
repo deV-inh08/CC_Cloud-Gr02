@@ -1,5 +1,7 @@
 import jwt, { SignOptions }  from 'jsonwebtoken'
 import { config } from 'dotenv'
+import { TokenPayload } from '~/models/requests/user.request';
+import { error } from 'console';
 // import { TokenPayload } from '~/models/requests/user.request'
 
 config()
@@ -9,7 +11,7 @@ interface Props {
   option?: SignOptions,
 };
 
-export const signToken = ({ payload, privateKey, option = { algorithm: 'HS256' } }: Props) => {
+ const signToken = ({ payload, privateKey, option = { algorithm: 'HS256' } }: Props) => {
   return new Promise<string>((resolve, reject) => {
     jwt.sign(payload, privateKey, option, (error, token) => {
       if (error) {
@@ -19,3 +21,19 @@ export const signToken = ({ payload, privateKey, option = { algorithm: 'HS256' }
     })
   })
 };
+
+const verifyToken = ({ token, secretOrPublicKey }: {token: string, secretOrPublicKey: string}) => {
+  return new Promise<TokenPayload>((resolve, reject) => {
+    jwt.verify(token, secretOrPublicKey, (error, decoded) => {
+      if(error) {
+        throw reject(error)
+      };
+      resolve(decoded as TokenPayload)
+    })
+  })
+}
+
+export {
+  signToken,
+  verifyToken
+}

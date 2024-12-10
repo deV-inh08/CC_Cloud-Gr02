@@ -1,7 +1,7 @@
 import { Router } from "express"
-import { loginValidator, registerValidator } from "~/middlewares/auth.middlewares";
+import { accessTokenValidator, loginValidator, refressTokenValidator, registerValidator } from "~/middlewares/auth.middlewares";
 import { wrapRequestHandler } from "~/utils/handlers";
-import { loginController, registerController } from "~/controllers/users.controllers";
+import { loginController, logOutController, registerController } from "~/controllers/users.controllers";
 const userRouters = Router();
 
 // Register a user
@@ -9,9 +9,12 @@ const userRouters = Router();
 // Body: { email: string, password: string, confirm_password: string }
 
 
-userRouters.post('/register', registerValidator, wrapRequestHandler(registerController))
+userRouters.post('/signup', registerValidator, wrapRequestHandler(registerController));
 
 
-userRouters.post('/login', loginValidator, wrapRequestHandler(loginController))
+userRouters.post('/login', loginValidator, wrapRequestHandler(loginController));
+
+
+userRouters.post('/logout', accessTokenValidator, refressTokenValidator, wrapRequestHandler(logOutController))
 
 export default userRouters;
