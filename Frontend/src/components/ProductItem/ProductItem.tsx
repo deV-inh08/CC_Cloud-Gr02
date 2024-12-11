@@ -27,7 +27,7 @@ const ProductItem = ({ item }: Props) => {
       toast.success("Add To Cart Success", { autoClose: 1000 })
     }
     toast.error("Please sign in to continute", { autoClose: 1000 })
-  }
+  };
   
   return (
     <Link to={`${paths.home}${item.id}`}>

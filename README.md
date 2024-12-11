@@ -6,17 +6,20 @@ and cloud concepts to deliver a fully functional e-commerce application.
 
 ----
 
-  ## Members ##
-| *** ID *** |    *** Name ***         | *** MSSV ***   |
-| 1          |  Nguyễn Minh Phú        |   22166069     |
-| 2          |  Trần Xuân Trường       |   22166095     |
-| 3          |  Hồ Võ Minh Trường      |   22166093     |
-| 4          |  Nguyễn Đức Trọng       |   22166091     |
-| 5          |  Đinh Trúc Vân          |   22166102     |
-| 6          |  Nguyễn Hoàng Minh Tuấn |   22166098     |
-| 7          |  Trần Dương Vinh        |   22166103     |
+## **Members**
+
+| ***ID*** | ***Name***               | ***MSSV*** |
+|----------|------------------------- |------------|
+| 1        | Nguyễn Minh Phú          | 22166069   |
+| 2        | Trần Xuân Trường         | 22166095   |
+| 3        | Hồ Võ Minh Trường        | 22166093   |
+| 4        | Nguyễn Đức Trọng         | 22166091   |
+| 5        | Đinh Trúc Vân            | 22166102   |
+| 6        | Nguyễn Hoàng Minh Tuấn   | 22166098   |
+| 7        | Trần Dương Vinh          | 22166103   |
 
 
+---
 
 ## **Tech Stack** ##
 This project leverages the following technologies:  
@@ -36,17 +39,42 @@ This project leverages the following technologies:
 
 ## **Project Setup**  
 
-### Prerequisites  
-Ensure you have the following installed:  
-- Node.js (v16 or later)  
-- npm and yarn  
-- PostgreSQL 
+### **Prerequisites**
+
+Ensure you have the following installed:
+
+- Node.js (v16 or later) - [Download Node.js](https://nodejs.org/)
+- npm and yarn (npm comes with Node.js by default, but you can install yarn via `npm install -g yarn`)
+- PostgreSQL - [Download PostgreSQL](https://www.postgresql.org/download/)
+
+### **Install Dependencies**
+#### **For Backend**
+- cd backend
+- npm install
+- npm run dev
+
+### **For Frontend**
+- cd frontend
+- yarn add
+- yarn run dev
 
 
-### Feature
+### **Configure Environment Variables**
+DB_HOST=localhost
+DB_PORT=5432
+DB_USER=postgres
+DB_PASSWORD=your_password
+DB_NAME=ecommerce
+JWT_SECRET=your_jwt_secret_key
+
+---
+
+
+### *** Feature ***
   - User authentication (login/register with JWT)
   - RESTful APIs for CRUD operations
   - Responsive UI built with Tailwind CSS
   - Integration with PostgreSQL database
-  - Role-based access control
   - Cloud deployment-ready architecture
+
+---
