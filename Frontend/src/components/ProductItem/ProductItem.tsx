@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Product } from '../../types/products.type';
 import { paths } from '../../constants/paths';
 import { Link } from 'react-router-dom';
@@ -7,21 +7,26 @@ import { addCart } from '../../pages/Cart/CartReducer';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css"
+import { AppContext } from '../../contexts/app.context';
 
 interface Props {
   item: Product
 };
 
 const ProductItem = ({ item }: Props) => {
+  const { isAuthenticated } = useContext(AppContext)
   const BUYCOUNT: number = 1;
 
   const dispath = useDispatch();
   
   const handleAddToCartOneProduct = (product: Product, e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
-    const productWithQuantity = {...product, quantity: BUYCOUNT}
-    dispath(addCart(productWithQuantity));
-    toast.success("Add To Cart Success", { autoClose: 1000 })
+    if(isAuthenticated) {
+      const productWithQuantity = {...product, quantity: BUYCOUNT}
+      dispath(addCart(productWithQuantity));
+      toast.success("Add To Cart Success", { autoClose: 1000 })
+    }
+    toast.error("Please sign in to continute", { autoClose: 1000 })
   }
   
   return (
