@@ -48,7 +48,7 @@ Ensure you have the following installed:
 - PostgreSQL - [Download PostgreSQL](https://www.postgresql.org/download/)
 
 ### **Install Dependencies**
-#### **For Backend**
+### **For Backend**
 - cd backend
 - npm install
 - npm run dev
@@ -60,12 +60,12 @@ Ensure you have the following installed:
 
 
 ### **Configure Environment Variables**
-DB_HOST=localhost
-DB_PORT=5432
-DB_USER=postgres
-DB_PASSWORD=your_password
-DB_NAME=ecommerce
-JWT_SECRET=your_jwt_secret_key
+ - DB_HOST=localhost
+ - DB_PORT=5432
+ - DB_USER=postgres
+ - DB_PASSWORD=your_password
+ - DB_NAME=ecommerce
+ - JWT_SECRET=your_jwt_secret_key
 
 ---
 
