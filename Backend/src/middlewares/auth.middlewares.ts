@@ -145,7 +145,7 @@ const accessTokenValidator = validate(checkSchema({
     }
   }
 }, ['body']
-))
+));
 
 const refressTokenValidator = validate(checkSchema({
   refresh_token: {
@@ -183,7 +183,7 @@ const refressTokenValidator = validate(checkSchema({
     }
   }
 }, ['body']
-))
+));
 
 
 export {
