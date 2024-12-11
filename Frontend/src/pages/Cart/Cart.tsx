@@ -12,6 +12,7 @@ const Cart = () => {
   const getCartList = useSelector((state: RootState) => state.Cart.cartList);
   let buyCount = 0;
   const [updateCart, setUpdateCart] = useState<boolean>(false);
+  
   const dispath = useDispatch();
 
   const cartsTotal = getCartList.reduce((total, item) => {
@@ -26,20 +27,15 @@ const Cart = () => {
     dispath(deleteCart(id))
   };
 
-  // const handleBuyCount = (value: number) => {
-  //   setBuyCount(value)
-  // };
-
   const handleUpdateCartQuantity = (id: number ,quantity: number) => {
     dispath(updateCartQuantity({ id, quantity }))
-  }
+  };
 
   const handleIncrease = (id: number) => { 
     ++buyCount;
     console.log(id, buyCount)
     handleUpdateCartQuantity(id, buyCount)
-  }
-
+  };
 
   return (
     <section className='mx-auto container'>
