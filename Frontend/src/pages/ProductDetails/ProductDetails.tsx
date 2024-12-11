@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import ProductApi from '../../api/products.api';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import QuantityController from '../../components/QuantityController';
 import { Product, ProductList } from '../../types/products.type';
@@ -10,11 +10,16 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation'
 import ProductItem from '../../components/ProductItem/ProductItem';
+import { useDispatch } from 'react-redux';
+import { addCart } from '../Cart/CartReducer';
+import { paths } from '../../constants/paths';
 
 const ProductDetails = () => {
   const [buyCount, setBuyCount] = useState(1);
   const { id } = useParams();
   const imgRef = useRef<HTMLImageElement>(null);
+  const dispath = useDispatch();
+
 
   const { data: productDetailData } = useQuery({
     queryKey: ['products', id],
@@ -28,7 +33,8 @@ const ProductDetails = () => {
     queryFn: () => {
         return ProductApi.getProductByCategory(queryConfig.category as ProductList)
     }
-});
+  });
+
 
   const handleBuyCount = (value: number) => {
     setBuyCount(value)
@@ -57,6 +63,11 @@ const ProductDetails = () => {
   const handleRemoveZoom = () => {
     imgRef.current?.removeAttribute("style")
   };
+
+  const handleAddToCart = (product: Product) => {
+    const productWithQuantity = {...product, quantity: buyCount}
+    dispath(addCart(productWithQuantity))
+  }
 
   return (
     <section className='container mx-auto'>
@@ -104,11 +115,13 @@ const ProductDetails = () => {
                     onType={handleBuyCount}
                     value={buyCount}
                   ></QuantityController>
-                  <button
+                  <Link
+                    to={paths.cart}
                     className='ml-4 flex h-12 min-w-[5rem] items-center justify-center rounded-sm bg-orange px-6 capitalize text-white shadow-sm outline-none bg-primaryColor'
+                    onClick={() => handleAddToCart(productDetailData.data)}
                   >
                     Buy Now
-                  </button>
+                  </Link>
                 </div>
                 <div className='flex flex-col mt-5 gap-5'>
                   <div className='flex border border-black gap-3 py-2 px-5'>
