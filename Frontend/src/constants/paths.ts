@@ -8,11 +8,5 @@ export const paths = {
     products: '/products',
     cart: "/cart",
     wishlist: '/wishlist',
-    productDetail: ":id",
-
-    user: '/user',
-    profile: "/user/profile",
-    changePassword: "/user/password",
-    historyPurchase: "/user/purchase",
-    
+    productDetail: ":id",    
 } as const
