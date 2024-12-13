@@ -11,6 +11,10 @@ type checkEmailExistsType = {
   exists: number
 }
 
+type checkUserLogout = {
+  rowCount: number
+}
+
 class UsersServices {
   private async signEmailVerifyToken({ user_id, verify }: { user_id: string; verify: UserVerifyStatus }) {
     return signToken({
@@ -107,7 +111,7 @@ class UsersServices {
 
   async logout(refresh_token: string) {
     try {
-      const result = await databaseServices.query('UPDATE users SET refresh_token = NULL WHERE refresh_token = $1', [refresh_token]);
+      const result = await databaseServices.query<{rowCount: number}>('UPDATE users SET refresh_token = NULL WHERE refresh_token = $1', [refresh_token]);
       if(result.rowCount === 0) {
         throw new Error("Refresh token not found")
       }
