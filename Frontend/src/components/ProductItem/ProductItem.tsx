@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { Product } from '../../types/products.type';
 import { paths } from '../../constants/paths';
 import { Link } from 'react-router-dom';
@@ -25,8 +25,10 @@ const ProductItem = ({ item }: Props) => {
       const productWithQuantity = {...product, quantity: BUYCOUNT}
       dispath(addCart(productWithQuantity));
       toast.success("Add To Cart Success", { autoClose: 1000 })
+    } else {
+      toast.error("Please sign in to continute", { autoClose: 1000 })
     }
-    toast.error("Please sign in to continute", { autoClose: 1000 })
+    
   };
   
   return (

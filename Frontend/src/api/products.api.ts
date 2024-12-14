@@ -23,15 +23,16 @@ const ProductApi = {
     })
   },
 
-  searchProduct(search: string, params?: QueryConfig) {
-    return httpProduct.get<SuccessResponse<ProductList>>(`products/search?q=${search}`, { params }).then((repsonse) => {
+  searchProduct(search: string) {
+    return httpProduct.get<SuccessResponse<ProductList>>(`products/search?q=${search}`).then((repsonse) => {
       return repsonse.data
     })
   },
 
   getProductDetail(id: string) {
     return httpProduct.get<SuccessResponse<Product>>(`${URL}/${id}`)
-  }
+  },
+
 }
 
 

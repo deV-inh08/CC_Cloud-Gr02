@@ -16,7 +16,7 @@ const Cart = () => {
   const dispath = useDispatch();
 
   const cartsTotal = getCartList.reduce((total, item) => {
-    return ((total + (item.price - Math.floor(item.price) * (item.discountPercentage / 100))) * item.quantity).toFixed(1)
+    return total + ((item.price - Math.floor(item.price) * (item.discountPercentage / 100)) * item.quantity)
   }, 0);
 
   const handleUpdateCart = () => {
@@ -117,7 +117,7 @@ const Cart = () => {
             <p className='font-medium text-2xl'>Cart Total</p>
             <div className='flex justify-between'>
               <p>Subtotal:</p>
-              <p>${cartsTotal}</p>
+              <p>${cartsTotal.toFixed(1)}</p>
             </div>
             <div className='h-[1px] bg-gray-400 rounded-md -mt-4'></div>
             <div className='flex justify-between'>
@@ -127,7 +127,7 @@ const Cart = () => {
             <div className='h-[1px] bg-gray-400 rounded-md -mt-4'></div>
             <div className='flex justify-between text-xl'>
               <p>Total:</p>
-              <p className=' text-primaryColor font-medium'>${cartsTotal}</p>
+              <p className=' text-primaryColor font-medium'>${cartsTotal.toFixed(1)}</p>
             </div>
             <ViewAllProduct value='Process to checkout'></ViewAllProduct>
           </section>

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { paths } from '../../constants/paths';
 import { AppContext } from '../../contexts/app.context';
@@ -8,12 +8,31 @@ import Popover from '../Popover';
 import { clearLocalStorage, getAccessTokenFromLS, getRefreshTokenFromLS } from '../../utils/auth';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../CartStore';
+import { useQuery } from '@tanstack/react-query';
+import ProductApi from '../../api/products.api';
+import { debounce } from 'lodash';
+import SearchItem from '../SearchItem';
 
 const Header = () => {
+  const [search, setSearch] = useState<string | null>(null)
   const { isAuthenticated, setIsAuthenticated } = useContext(AppContext);
 
   const getCartList = useSelector((state: RootState) => state.Cart.cartList);
-  console.log(getCartList);
+
+  const debounceSearch = useMemo(() => debounce((value: string) => {
+    setSearch(value)
+    }, 500
+  ), [search]);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    debounceSearch(e.target.value)
+  };
+
+  useEffect(() => {
+    return () => {
+      debounceSearch.cancel();
+    };
+  }, [debounceSearch]);
 
   const logoutMutation = useMutation({
     mutationFn: () => {
@@ -30,6 +49,13 @@ const Header = () => {
   const handleLogout = () => {
     logoutMutation.mutate()
   };
+
+  const { data: searchData } = useQuery({
+    queryKey: ['/products', search],
+    queryFn: () => {
+      return ProductApi.searchProduct(search as string)
+    }
+  });
 
   return (
     <div className="py-4 top-0 sticky z-10  shadow-lg font-karla">
@@ -67,10 +93,11 @@ const Header = () => {
           </Link>
         </ul>
         <div className='flex gap-4 items-center'>
-          <Link
+          <div
             className='flex items-center relative'
           >
             <input
+              onChange={(e) => handleInputChange(e)}
               type="text"
               placeholder='What are you looking for?'
               className='border w-full py-1 px-5 mr-5 rounded-md shadow-sm'
@@ -78,7 +105,21 @@ const Header = () => {
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 absolute right-5">
               <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
             </svg>
-          </Link>
+            {
+              searchData && searchData.products.length > 0 && (
+                <div className='absolute flex flex-col shadow-md -left-2 h-auto top-9 w-full'>
+                {searchData && searchData.products && searchData?.products.slice(0, 5).map((item) => {
+                  console.log(item)
+                  return (
+                    <SearchItem item={item}></SearchItem>
+                  )
+                })}
+              </div>
+              ) 
+            }
+           
+           
+          </div>
           <Link to={paths.wishlist}>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
               <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
