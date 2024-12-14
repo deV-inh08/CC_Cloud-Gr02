@@ -20,7 +20,6 @@ const ProductList = () => {
   });
   const { data: categoriesData } = useCategories();
 
-
   const location = useLocation();
   console.log(location.search)
   const navigate = useNavigate();
@@ -46,8 +45,6 @@ const ProductList = () => {
       }
     }
   });
-
-  console.log(productData)
 
   const handleClickCategory = (category: string) => {
     setQueryConfig((prevConfig: QueryConfig) : QueryConfig => {

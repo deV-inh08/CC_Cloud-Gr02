@@ -22,7 +22,7 @@ const Header = () => {
   const debounceSearch = useMemo(() => debounce((value: string) => {
     setSearch(value)
     }, 500
-  ), [search]);
+  ), []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     debounceSearch(e.target.value)
@@ -53,8 +53,13 @@ const Header = () => {
   const { data: searchData } = useQuery({
     queryKey: ['/products', search],
     queryFn: () => {
-      return ProductApi.searchProduct(search as string)
+      if(search === "") {
+        setSearch(null)
+      } else {
+        return ProductApi.searchProduct(search as string)
+      }
     }
+    
   });
 
   return (
