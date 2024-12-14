@@ -5,24 +5,22 @@ import { config } from "dotenv"
 import databaseServices from "./services/database.services";
 
 config()
+
+databaseServices.connect()
+
 const app = express()
 const PORT = 8080
 
 app.use(express.json())
+
 app.use(cors())
 
 app.use('/users', userRouters)
 
-databaseServices.connect()
 
 app.listen(PORT, () => {
   console.log(`Server is running at port: http://localhost:${PORT}`)
-})
-
-
-
-
-
+});
 
 // DB_USER = 'postgres'
 // DB_PASSWORD = 'postgres'

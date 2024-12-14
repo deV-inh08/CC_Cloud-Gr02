@@ -1,26 +1,31 @@
 import { Pool } from 'pg';
 import { config } from 'dotenv';
-config(); 
+import { Connector } from "@google-cloud/cloud-sql-connector"
+
+config();  
 class DatabaseServices {
   private pool: Pool;
-
   constructor() {
-    this.pool = new Pool({
-      user: process.env.DB_USER,
-      host: process.env.DB_HOST,
-      database: process.env.DB_NAME,
-      password: process.env.DB_PASSWORD,
-      port: parseInt(process.env.DB_PORT as string)
-    });
+    this.pool = new Pool({});
   }
 
   async connect() {
     try {
+      const connector = new Connector();
+      const clientOpts = await connector.getOptions({
+        instanceConnectionName: 'nlu-gcp-hk241-group01:us-central1:cc-group02',
+      });
+      this.pool = new Pool({
+        ...clientOpts,
+        user: process.env.DB_USER, 
+        password: process.env.DB_PASSWORD, 
+        database: process.env.DB_NAME,
+      })
       const client = await this.pool.connect();
       console.log('Connected to PostgreSQL successfully');
-      client.release();
+      client.release();  
     } catch (err) {
-      console.error('Error connecting to PostgreSQL', err);
+      console.error('Error connecting to PostgreSQL via Cloud SQL', err);
       throw err;
     }
   }
@@ -36,6 +41,5 @@ class DatabaseServices {
   }
 }
 
-
 const databaseServices = new DatabaseServices();
-export default databaseServices
+export default databaseServices;
