@@ -19,8 +19,7 @@ const ProductDetails = () => {
   const { id } = useParams();
   const imgRef = useRef<HTMLImageElement>(null);
   const dispath = useDispatch();
-
-
+  
   const { data: productDetailData } = useQuery({
     queryKey: ['products', id],
     queryFn: () => ProductApi.getProductDetail(id as string),
@@ -34,7 +33,6 @@ const ProductDetails = () => {
         return ProductApi.getProductByCategory(queryConfig.category as ProductList)
     }
   });
-
 
   const handleBuyCount = (value: number) => {
     setBuyCount(value)
@@ -67,7 +65,7 @@ const ProductDetails = () => {
   const handleAddToCart = (product: Product) => {
     const productWithQuantity = {...product, quantity: buyCount}
     dispath(addCart(productWithQuantity))
-  }
+  };
 
   return (
     <section className='container mx-auto'>

@@ -25,7 +25,7 @@ const signupSchema = schema.pick([
 
 const SignUp = () => {
   const { setIsAuthenticated } = useContext(AppContext);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors }, setError } = useForm<FormData>(
     {
       resolver: yupResolver(signupSchema)
@@ -67,7 +67,6 @@ const SignUp = () => {
       <div className='col-span-5 mt-24 ml-5'>
         <h1 className='font-medium text-5xl'>Create an account</h1>
         <p className='mt-8 '>Enter your details below</p>
-
         <form onSubmit={onSubmit} autoComplete='off' method='post' className='flex flex-col gap-7 mt-9'>
           <div>
             <Input
