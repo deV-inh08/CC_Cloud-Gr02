@@ -2,6 +2,7 @@ import httpAuth from "../utils/httpAuth";
 
 const authAPI = {
   signupAccount: (body: {email: string, password: string}) => {
+    console.log(body)
     return httpAuth.post('/signup', body)
   },
 
