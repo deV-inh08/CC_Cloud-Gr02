@@ -125,7 +125,8 @@ const Footer = () => {
       </div>
       <div className="text-center mt-8 text-sm">
         <div className='w-full h-[1px] bg-gray-400/30'></div>
-        <p className='text-gray-300/40 mt-3'>© Copyright Rimel 2022. All right reserved</p>
+        <p className='text-gray-300/40 mt-3'>Desgin by Rimel 2022</p>
+        <p className='mt-2'>© Copyright Group-02. All right reserved</p>
       </div>
     </footer>
   )
