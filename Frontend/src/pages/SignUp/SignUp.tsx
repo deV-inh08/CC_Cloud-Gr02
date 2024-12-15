@@ -74,7 +74,7 @@ const SignUp = () => {
               name='email'
               type="email"
               errorMessage={errors.email?.message}
-              classNameInput='border-b-2 border-ransparent outline-none focus:text-primaryColor/50 bg-transparent py-3 '
+              classNameInput='border-b-2 border-ransparent outline-none focus:text-red-500 bg-transparent py-3 '
               placeholder='Enter your email'
             ></Input>
           </div>
@@ -84,7 +84,7 @@ const SignUp = () => {
               name='password'
               type="password"
               errorMessage={errors.password?.message}
-              classNameInput='border-b-2 border-ransparent outline-none focus:text-primaryColor/50 bg-transparent py-3 '
+              classNameInput='border-b-2 border-ransparent outline-none focus:text-red-500 bg-transparent py-3 '
               placeholder='Enter your password'
             ></Input>
           </div>
@@ -94,7 +94,7 @@ const SignUp = () => {
               name="confirm_password"
               type="password"
               errorMessage={errors.confirm_password?.message}
-              classNameInput='border-b-2 border-ransparent outline-none focus:text-primaryColor/50 bg-transparent py-3 '
+              classNameInput='border-b-2 border-ransparent outline-none focus:text-red-500 bg-transparent py-3 '
               placeholder='Enter your confirm password'
             ></Input>
           </div>

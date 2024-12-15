@@ -106,7 +106,6 @@ class UsersServices {
     } else {
       return false
     }
-    
   }
 
   async logout(refresh_token: string) {

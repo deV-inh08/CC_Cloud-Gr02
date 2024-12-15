@@ -70,7 +70,7 @@ const SignIn = () => {
               name='email'
               type="email"
               errorMessage={errors.email?.message}
-              classNameInput='border-b-2 border-ransparent outline-none focus:text-primaryColor/50 bg-transparent py-3 '
+              classNameInput='border-b-2 border-ransparent outline-none focus:text-red-600 bg-transparent py-3 '
               placeholder='Enter your email'
             >
             </Input>
@@ -82,7 +82,7 @@ const SignIn = () => {
               name='password'
               type="password"
               errorMessage={errors.password?.message}
-              classNameInput='border-b-2 border-ransparent outline-none focus:text-primaryColor/50 bg-transparent py-3 '
+              classNameInput='border-b-2 border-ransparent outline-none focus:text-red-600 bg-transparent py-3 '
               placeholder='Enter your password'
             ></Input>
 
