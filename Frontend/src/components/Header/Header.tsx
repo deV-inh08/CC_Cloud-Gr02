@@ -16,6 +16,7 @@ import SearchItem from '../SearchItem';
 const Header = () => {
   const [search, setSearch] = useState<string | null>(null)
   const { isAuthenticated, setIsAuthenticated } = useContext(AppContext);
+  const [ isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   const getCartList = useSelector((state: RootState) => state.Cart.cartList);
 
@@ -38,6 +39,9 @@ const Header = () => {
     mutationFn: () => {
       const access_token = getAccessTokenFromLS();
       const refresh_token = getRefreshTokenFromLS(); 
+
+      console.log(access_token);
+      console.log(refresh_token)
       return authAPI.logoutAccount({access_token, refresh_token})
     },
     onSuccess: () => {
@@ -59,19 +63,19 @@ const Header = () => {
         return ProductApi.searchProduct(search as string)
       }
     }
-    
   });
 
   return (
-    <div className="py-4 top-0 sticky z-10  shadow-lg font-karla">
-      <div className='container flex justify-between mx-auto'>
+    <div className="top-0 sticky z-10  shadow-lg font-karla">
+      <div className='container flex justify-between mx-auto px-4 py-2 relative bg-white' >
         <Link
           to={paths.home}
           className='font-bold text-2xl'
         >
           Exclusive
         </Link>
-        <ul className='flex items-center gap-10 px-4'>
+       
+        <ul className={`flex lg:relative w-auto items-center gap-10 px-4`}>
           <Link
             to={paths.home}
             className=''
@@ -99,7 +103,7 @@ const Header = () => {
         </ul>
         <div className='flex gap-4 items-center'>
           <div
-            className='flex items-center relative'
+            className='lg:flex lg:items-center lg:relative hidden '
           >
             <input
               onChange={(e) => handleInputChange(e)}
@@ -122,10 +126,8 @@ const Header = () => {
               </div>
               ) 
             }
-           
-           
           </div>
-          <Link to={paths.wishlist}>
+          <Link className='' to={paths.wishlist}>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
               <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
             </svg>
@@ -152,9 +154,7 @@ const Header = () => {
               </svg>
               <p></p>
             </Popover>
-
           )}
-
         </div>
       </div>
     </div>

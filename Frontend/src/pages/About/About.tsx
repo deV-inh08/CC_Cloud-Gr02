@@ -4,7 +4,7 @@ import img46 from "../../assets/image 46.png"
 import img47 from "../../assets/image 47.png"
 import img51 from "../../assets/image 51.png"
 import Services from '../../components/Services'
-
+import ScrollCounter from '../../components/ScrollCounter'
 
 const About = () => {
   return (
@@ -33,7 +33,7 @@ const About = () => {
               </g>
             </svg>
           </div>
-          <h4 className='font-bold text-4xl'>10.5k</h4>
+          <ScrollCounter start={0} end={10.5}></ScrollCounter>
           <p className=''>Sallers active our site</p>
         </div>
         <div className='col-span-3 h-[300px] border flex flex-col justify-center items-center gap-4 hover:bg-primaryColor hover:text-white transition-all duration-700'>
@@ -44,7 +44,7 @@ const About = () => {
               </g>
             </svg>
           </div>
-          <h4 className='font-bold text-4xl'>33k</h4>
+          <ScrollCounter start={0} end={33}></ScrollCounter>
           <p className=''>Mopnthly Produduct Sale</p>
         </div>
         <div className='col-span-3 h-[300px] border flex flex-col justify-center items-center gap-4 hover:bg-primaryColor hover:text-white transition-all duration-700'>
@@ -67,7 +67,7 @@ const About = () => {
             </svg>
 
           </div>
-          <h4 className='font-bold text-4xl'>45.5k</h4>
+          <ScrollCounter start={0} end={45.5}></ScrollCounter>
           <p className=''>Customer active in our site</p>
         </div>
         <div className='col-span-3 h-[300px] border flex flex-col justify-center items-center gap-4 hover:bg-primaryColor hover:text-white transition-all duration-700'>
@@ -80,7 +80,8 @@ const About = () => {
             </svg>
 
           </div>
-          <h4 className='font-bold text-4xl'>25k</h4>
+          <ScrollCounter start={0} end={25}></ScrollCounter>
+
           <p className=''>Anual gross sale in our site</p>
         </div>
       </article>

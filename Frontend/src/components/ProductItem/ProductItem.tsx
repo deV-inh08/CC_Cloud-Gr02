@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css"
 import { AppContext } from '../../contexts/app.context';
+import LazyLoad from 'react-lazyload';
 
 interface Props {
   item: Product
@@ -18,19 +19,19 @@ const ProductItem = ({ item }: Props) => {
   const BUYCOUNT: number = 1;
 
   const dispath = useDispatch();
-  
+
   const handleAddToCartOneProduct = (product: Product, e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
-    if(isAuthenticated) {
-      const productWithQuantity = {...product, quantity: BUYCOUNT}
+    if (isAuthenticated) {
+      const productWithQuantity = { ...product, quantity: BUYCOUNT }
       dispath(addCart(productWithQuantity));
       toast.success("Add To Cart Success", { autoClose: 1000 })
     } else {
       toast.error("Please sign in to continute", { autoClose: 1000 })
     }
-    
+
   };
-  
+
   return (
     <Link to={`${paths.home}${item.id}`}>
       <article className='flex select-none'>
@@ -52,7 +53,10 @@ const ProductItem = ({ item }: Props) => {
             </svg>
           </div>
           <div className='flex flex-col items-center justify-center relative w-full h-[250px] shadow-md bg-zinc-200/50 overflow-hidden'>
-            <img src={item.images[0]} alt="products" className='w-[180px] h-[145px] object-cover' />
+            <LazyLoad>
+              <img src={item.images[0]} alt="products" className='w-[180px] h-[145px] object-cover' />
+
+            </LazyLoad>
             <div className='w-full h-full absolute bg-black/10 flex flex-col-reverse -bottom-20 hover:bottom-0 opacity-0 hover:opacity-100 transition-all duration-55'>
               <button
                 className='bg-black text-white py-2 px-5 rounded-sm bottom-0 text-center'
