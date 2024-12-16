@@ -12,7 +12,7 @@ class HttpAuth {
     this.accessToken = getAccessTokenFromLS()
     this.refreshtoken = getRefreshTokenFromLS()
     this.instance = axios.create({
-      baseURL: "https://20241213t120348-dot-nlu-gcp-hk241-group01.de.r.appspot.com",
+      baseURL: "https://backendecommercegroup02-dot-nlu-gcp-hk241-group01.de.r.appspot.com/users",
       timeout: 10000,
       headers: {
         "Content-Type": "application/json"

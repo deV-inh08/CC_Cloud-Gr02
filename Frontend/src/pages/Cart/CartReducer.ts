@@ -43,7 +43,7 @@ export const cartReducer = createReducer(initialStateType, builder => {
       const { id, quantity } = action.payload;
       const existingCart = state.cartList.find(cart => cart.id === id);
       if(existingCart) {
-        existingCart.quantity += quantity
+        existingCart.quantity = quantity
       }
     })
 });

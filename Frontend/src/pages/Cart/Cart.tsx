@@ -10,7 +10,6 @@ import InputNumber from '../../components/InputNumber';
 
 const Cart = () => {
   const getCartList = useSelector((state: RootState) => state.Cart.cartList);
-  let buyCount = 0;
   const [updateCart, setUpdateCart] = useState<boolean>(false);
   
   const dispath = useDispatch();
@@ -31,11 +30,19 @@ const Cart = () => {
     dispath(updateCartQuantity({ id, quantity }))
   };
 
-  const handleIncrease = (id: number) => { 
-    ++buyCount;
-    console.log(id, buyCount)
-    handleUpdateCartQuantity(id, buyCount)
+  const handleIncrease = (id: number, quantity: number) => { 
+    ++quantity
+    handleUpdateCartQuantity(id, quantity)
   };
+
+  const handleDecrease = (id: number, quantity: number) => {
+    --quantity;
+    if(quantity >= 1) {
+      handleUpdateCartQuantity(id, quantity)
+    } else {
+      quantity = 1
+    }
+  }
 
   return (
     <section className='mx-auto container'>
@@ -74,19 +81,18 @@ const Cart = () => {
               </div>
               <div className='col-span-3 justify-items-center'>
                 <div className={"flex items-center"}>
-                  <button  className='flex h-8 w-8 items-center justify-center rounded-l-sm border border-gray-300 text-gray-600'>
+                  <button onClick={() => handleDecrease(item.id, item.quantity)}  className='flex h-8 w-8 items-center justify-center rounded-l-sm border border-gray-300 text-gray-600'>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-4">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14" />
                     </svg>
                   </button>
                   <InputNumber
-                    value={item.quantity}
-                    className=''
+                    value={item.quantity <= 1 ? 1 : item.quantity}
                     classNameError='hidden'
                     classNameInput='h-8 w-14 border-t border-b border-gray-300 text-center outline-none'
                   >
                   </InputNumber>
-                  <button onClick={() => handleIncrease(item.id)} className='flex h-8 w-8 items-center justify-center rounded-l-sm border border-gray-300 text-gray-600'>
+                  <button onClick={() => handleIncrease(item.id, item.quantity)} className='flex h-8 w-8 items-center justify-center rounded-l-sm border border-gray-300 text-gray-600'>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
